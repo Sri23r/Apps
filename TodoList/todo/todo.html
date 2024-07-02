@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        .b{
+            margin: 50px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .div{
+            margin-top: 5%;
+            margin-left: 32%;
+            border: 4px solid red;
+            border-radius: 20px;
+            padding: 40px;
+            width: fit-content;
+            background-color: lavender;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        @keyframes backgroundAnimation{
+            0%{
+                background-color: blue;
+            }
+            25%{
+                background-color: blueviolet;
+            }
+            50%{
+                background-color: yellow;
+            }
+            75%{
+                background-color: chartreuse;
+            }
+            100%{
+                background-color: darkgreen;
+            }
+        }
+        .background{
+            animation: backgroundAnimation 10s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="div">
+            <b class="b">To Do List</b> <br>
+            <input id="input">
+            <button onclick="add()">Add</button>
+            <button onclick="show()">Show</button>
+            <ul id="list">
+    
+            </ul>
+            <ul id="listitem"></ul>
+        </div>
+        
+    </div>
+
+    <script>
+        var ul=document.getElementById("list")
+        let tasks=[];
+    
+        function add(){
+            var input=document.getElementById("input")
+            let task=input.value.trim();
+            if(task!==""){
+                tasks.push(task);
+                var listitem=document.createElement("li")
+                listitem.innerHTML=input.value + "<Button onclick='del()'>Delete</Button>"
+                ul.append(listitem)
+                input.value="";
+            }
+        
+        }
+
+        function del(){
+            event.target.parentElement.remove()
+        }
+
+        function show(){
+            let taskList=document.getElementById("listitem");
+            taskList.innerHTML="";
+            tasks.forEach(function(list){
+                let item=document.createElement("li");
+                item.textContent = list;
+                taskList.appendChild(item);
+            }) 
+        }
+
+    </script>
+</body>
+</html>
